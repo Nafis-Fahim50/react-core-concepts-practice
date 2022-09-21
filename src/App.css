@@ -50,3 +50,16 @@
   border: 3px solid blue;
   color: white;
 }
+
+.post-container{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 15px;
+}
+
+.post{
+  border: 5px solid orangered;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 15px;
+}

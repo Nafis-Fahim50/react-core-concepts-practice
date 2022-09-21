@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   return (
@@ -18,8 +18,44 @@ function App() {
       name='Chittagong'
       town ='Potengga'
       ></District>
+      <LoadPosts></LoadPosts>
     </div>
   );
+}
+
+function LoadPosts(){
+  const[posts, setPosts] = useState([])
+  useEffect(()=>{
+
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.json())
+    .then(data => setPosts(data))
+
+  },[])
+
+  return(
+    <div>
+      <h2>Posts</h2>
+      <h4>Total Posts: {posts.length}</h4>
+      <div  className='post-container'>
+      {
+        posts.map(post => <Post post={post}></Post>)
+      }
+      </div>
+      
+    </div>
+  )
+}
+
+function Post(props){
+  const {id,title,body} = props.post;
+  return(
+    <div className='post'>
+      <h3>ID: {id} </h3>
+      <p>Title: {title} </p>
+      <small>Post: {body}</small>
+    </div>
+  )
 }
 
 function District(props){
